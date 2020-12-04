@@ -2,7 +2,7 @@
 **JWT(Json Web Token)** 은 토큰 기반 인증 방식으로, 서버가 사용자의 세션 상태를 저장하는 게 아니라, 필요한 정보를 토큰 body에 저장해 사용자가 가지고 있고 그것을 증명서 처럼 사용(**Stateless**). 사용자는 Access Token(JWT Token)을 **헤더**에 실어 서버로 보냄.
 
 ## 1. 특징
----
+
 토큰은 **Header, Payload, Verifiy Signature**로 구성됨.
 1. Header
     * Header, Payload, Verify Signature 정보를 암호화할 방식(alg), 타입(type)등이 들어감.
@@ -20,7 +20,7 @@
 Header와 payload는 base64로 인코딩만 되므로 누구나 디코딩 하여 확인 가능. 따라서 payload에는 중요한 정보가 포함되면 안됨. verify signature는 Secret Key를 알지 못하면 복호화 할 수 없음.
 
 ## 2. JWT 인증방식 단계
----
+
 1. 클라이언트가 로그인을 위해 해당 정보를 서버에 전달.
 2. 서버에서는 전달된 데이터로 사용자를 확인하고 사용자의 고유한 ID값을 부여한 후, 기타 필요한 정보와 함께 Payload에 추가.
 3. JWT 토큰의 유효기간을 설정.
@@ -29,7 +29,7 @@ Header와 payload는 base64로 인코딩만 되므로 누구나 디코딩 하여
 6. 서버에서는 해당 토큰의 Verify Signature를 SECRET KEY로 복호화 한 후, 조작 여부, 유효기간을 확인.
 7. 해당 토큰이 유효하면 Payload를 디코딩하여 사용자의 ID에 맞는 데이터를 호출.
 ## 2. 장, 단점
----
+
 1. 장점
     * JWT는 발급한 후 노큰 검증만 하면 되기 때문에 추가 저장소가 필요 없음.
     * 서버를 확장하거나 유지, 보수하는데 유리.
@@ -41,14 +41,14 @@ Header와 payload는 base64로 인코딩만 되므로 누구나 디코딩 하여
     * 유효기간을 짧게 하면 재로그인 시도가 잦아지고 길면 해커에게 탈취될 가능성이 큼.
 
 ## 3. 단점 보완 - Refresh Token
----
+
 기존의 Access Token의 유효기간을 짧게 하고 **Refresh Token**이라는 새로운 토큰을 발급하면 Access Token을 탈취당해도 상대적으로 피해를 줄일 수 있음.
 
 * Refesh Token은 Access Token과 똑같은 형태의 JWT임. 로그인이 완료됐을 때, Access Token 과 동시에 Refresh Token은 긴 유효기간을 갖고 발행되고 Access Token의 유효기간이 만료되었을 때 새로 Token을 발급해주는 열쇠가 필요함.
 
 * Refresh Token의 유효기간이 만료되면 사용자는 새로 로그인해야 하고, Access Token과 동일하게 Refresh Token도 탈취될 가능성이 있기 때문에 적절한 유효기간 설정이 필요함.
 ## 4. Refresh Token이 포함된 JWT 인증방식 단계
----
+
 1. 클라이언트가 로그인을 위해 해당 정보를 서버에 전달.
 2. 서버에서는 전달된 데이터로 사용자를 확인하고 사용자의 고유한 ID값을 부여한 후, 기타 필요한 정보와 함께 Payload에 추가.
 3. JWT 토큰의 유효기간을 설정
